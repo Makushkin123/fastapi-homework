@@ -1,16 +1,14 @@
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
-from sqlalchemy.orm import DeclarativeBase, sessionmaker
-
-DB_HOST = "localhost"
-DB_PORT = 5432
-DB_USER = "root"
-DB_PASS = "root"
-DB_NAME = "fastapi"
-
-DATABASE_URL = f"postgresql+asyncpg://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+from sqlalchemy import Column, Integer, String, JSON
+from models import Base
 
 
-engine = create_async_engine(DATABASE_URL)
+class Hotels(Base):
 
+    __tablename__="hotels"
 
-async_session_maker = sessionmaker(engine, class_ = AsyncSession)
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    location = Column(String)
+    services = Column(JSON)
+    rooms_quantity= Column(Integer)
+    image_id = Column(Integer)
